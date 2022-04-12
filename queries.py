@@ -2,24 +2,16 @@
 # -*- coding: utf-8 -*-
 import sqlite3
 import json
-import pandas as pd
 
 try:
     sqliteConnection = sqlite3.connect('SQLite_Python.db')
     cursor = sqliteConnection.cursor()
     print('Database created and Successfully Connected to SQLite')
-
-    sqlite_select_Query = 'select sqlite_version();'
+    sqlite_select_Query = 'select * from trees where TREE_ID = 118157'
     cursor.execute(sqlite_select_Query)
     record = cursor.fetchall()
-    print('SQLite Database Version is: ', record)
+    print(record)
     cursor.close()
-    trees = pd.read_excel(
-        'data.xlsx',
-        sheet_name='Sheet',
-        header=0)
-    # if_exists can be changed to append or replace, append just keeps adding the same lines in
-    trees.to_sql('trees', sqliteConnection, if_exists='replace', index=False)
 except sqlite3.Error as error:
     print(error)
 finally:

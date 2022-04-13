@@ -1,19 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import sqlite3
-import json
 import pandas as pd
 
 try:
     sqliteConnection = sqlite3.connect('SQLite_Python.db')
-    cursor = sqliteConnection.cursor()
     print('Database created and Successfully Connected to SQLite')
-
-    sqlite_select_Query = 'select sqlite_version();'
-    cursor.execute(sqlite_select_Query)
-    record = cursor.fetchall()
-    print('SQLite Database Version is: ', record)
-    cursor.close()
     trees = pd.read_excel(
         'data.xlsx',
         sheet_name='Sheet',
